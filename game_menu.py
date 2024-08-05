@@ -20,8 +20,10 @@ class Menu:
     def __init__(self, tft: TFT):
         self.__tft__ = tft
         self.__selected__ = 0
+        self.is_shown = False
 
     def draw_menu(self):
+        self.is_shown = True
         self.__selected__ = 0
         self.__draw_menu_item__(0, True)
 
@@ -44,7 +46,7 @@ class Menu:
 
     def prev(self):
         self.__draw_menu_item__(self.__selected__, False)
-        self.__selected__ = len(MENU_ITEMS) - 1 if self.__selected__ - 1 == 0 else self.__selected__ - 1
+        self.__selected__ = len(MENU_ITEMS) - 1 if self.__selected__ - 1 < 0 else self.__selected__ - 1
         self.__draw_menu_item__(self.__selected__, True)
 
     def selected(self):
