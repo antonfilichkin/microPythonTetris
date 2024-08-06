@@ -10,6 +10,8 @@ from menu import Menu
 from controls import Buttons
 from graphics import Graphics
 
+from tetris import Figures
+
 # Menus
 MAIN_MENU = ("NEW GAME", "OPTIONS", "ABOUT")
 OPTIONS_MENU = ("Bcklght+", "Bcklght-")
@@ -79,11 +81,27 @@ async def with_options_menu():
 
 
 async def run_game():
+    figures = Figures(tft)
     graphics.draw_background()
     graphics.clear_field()
 
-    graphics.test_vertical()
-    graphics.test_horizontal()
+    figures.O_PIECE.show((40, 40))
+    await drop_figure()
+
+    # graphics.test_vertical()
+    # graphics.test_horizontal()
+
+
+async def drop_figure():
+    figures = Figures(tft)
+    start_y_old = 20
+    start_y_new = 20
+    while True:
+        figures.I_PIECE.hide((20, start_y_old))
+        figures.I_PIECE.show((20, start_y_new))
+        await asyncio.sleep(0.5)
+        start_y_old = start_y_new
+        start_y_new += 5
 
 
 async def main_task():
