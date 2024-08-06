@@ -7,6 +7,10 @@ FIELD_SIZE = (10, 20)
 class Graphics:
     def __init__(self, tft: TFT):
         self.__tft__ = tft
+        self.__buf__ = None
+
+    def save_state(self):
+        self.__buf__ = self.__tft__.buf
 
     def draw_background(self):
         self.__tft__.fillrect((0, 0), (128, 160), TFT.RED)

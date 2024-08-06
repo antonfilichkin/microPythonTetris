@@ -5,6 +5,7 @@ TFT_BL = 32
 TFT_CS = 15
 TFT_RESET = 4
 TFT_A0 = 16
+TFT_PWM = 27
 
 # SPI
 SPI_SDA = 23
