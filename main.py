@@ -85,7 +85,7 @@ async def run_game():
     graphics.draw_background()
     graphics.clear_field()
 
-    figures.O_PIECE.show((40, 40))
+    figures.O_PIECE.show()
     await drop_figure()
 
     # graphics.test_vertical()
@@ -94,14 +94,14 @@ async def run_game():
 
 async def drop_figure():
     figures = Figures(tft)
-    start_y_old = 20
-    start_y_new = 20
+    figures.I_PIECE.show()
     while True:
-        figures.I_PIECE.hide((20, start_y_old))
-        figures.I_PIECE.show((20, start_y_new))
+        figures.I_PIECE.fall()
         await asyncio.sleep(0.5)
-        start_y_old = start_y_new
-        start_y_new += 5
+        figures.I_PIECE.rotate()
+        figures.I_PIECE.right()
+        await asyncio.sleep(0.5)
+        figures.I_PIECE.left()
 
 
 async def main_task():
